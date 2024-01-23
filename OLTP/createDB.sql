@@ -42,6 +42,8 @@ CREATE TABLE production.brands (
 brand_id varchar(5) PRIMARY KEY,
 brand_name VARCHAR (255) NOT NULL
 );
+
+
 CREATE TABLE production.products (
 product_id varchar(10) PRIMARY KEY,
 product_name VARCHAR (255) NOT NULL,
@@ -54,6 +56,8 @@ ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (brand_id) REFERENCES production.brands (brand_id)
 ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
 CREATE TABLE sales.customers (
 customer_id varchar(10) PRIMARY KEY,
 first_name VARCHAR (255) NOT NULL,
