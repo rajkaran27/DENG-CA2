@@ -1,3 +1,3 @@
-INSERT INTO BikeSalesDWGroup3..OrderStatusDIM (orderStatus_id, order_status)
-SELECT order_status
+INSERT INTO BikeSalesDWGroup3..OrderDIM (order_id, order_status, order_date, required_date, shipped_date)
+SELECT order_id, order_status, order_date, required_date, shipped_date
 FROM sales.orders;
