@@ -18,6 +18,11 @@ INSERT INTO BikeSalesDWGroup3..BrandDIM (brand_id, brand_name)
 SELECT brand_id, brand_name
 FROM production.brands;
 
+-- Load data from sales.customers (OLTP) to BikeSalesDWGroup3.CustomerDIM (OLAP)
+INSERT INTO BikeSalesDWGroup3..CustomerDIM (customer_id, first_name, last_name, phone, email, street, city, state, zip_code)
+SELECT customer_id, first_name, last_name, phone, email, street, city, state, zip_code
+FROM sales.customers;
+
 -- still editing 
 -- Load data from sales.orders (OLTP) to BikeSalesDWGroup3.BrandDIM (OLAP)
 
@@ -31,10 +36,7 @@ FROM production.products p
 JOIN BikeSalesDWGroup3..CategoryDIM c ON p.category_id = c.category_id
 JOIN BikeSalesDWGroup3..BrandDIM b ON p.brand_id = b.brand_id;
 
--- Load data from sales.customers (OLTP) to BikeSalesDWGroup3.CustomerDIM (OLAP)
-INSERT INTO BikeSalesDWGroup3..CustomerDIM (customer_id, first_name, last_name, phone, email, street, city, state, zip_code)
-SELECT customer_id, first_name, last_name, phone, email, street, city, state, zip_code
-FROM sales.customers;
+
 
 -- Load data from sales.orders (OLTP) to BikeSalesDWGroup3.OrderDIM (OLAP)
 INSERT INTO BikeSalesDWGroup3..OrderDIM (order_id, order_date, required_date, shipped_date, orderStatusKey)
