@@ -45,21 +45,22 @@ zip_code VARCHAR (5)
 );
 -- pj
 
-CREATE TABLE OrderStatusDIM (
-orderStatusKey int IDENTITY PRIMARY KEY,
-order_status int NOT NULL,
-);
+-- CREATE TABLE OrderStatusDIM (
+-- orderStatusKey int IDENTITY PRIMARY KEY,
+-- );
+
 -- pj
 
 CREATE TABLE OrderDIM (
 orderKey int IDENTITY PRIMARY KEY,
 order_id varchar(10),
+order_status int NOT NULL,
 -- Order status: 1 = Pending; 2 = Processing; 3 = Rejected; 4 = Completed
 order_date DATE NOT NULL,
 required_date DATE NOT NULL,
 shipped_date DATE,
-orderStatusKey int NOT NULL,
-FOREIGN KEY (orderStatusKey) REFERENCES OrderStatusDIM (orderStatusKey)
+-- orderStatusKey int NOT NULL,
+-- FOREIGN KEY (orderStatusKey) REFERENCES OrderStatusDIM (orderStatusKey)
 -- customer_id varchar(10),
 -- product_id varchar(10) NOT NULL,
 -- store_id varchar(5) NOT NULL,
