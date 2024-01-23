@@ -47,9 +47,9 @@ zip_code VARCHAR (5)
 
 CREATE TABLE OrderStatusDIM (
 orderStatusKey int IDENTITY PRIMARY KEY,
-orderStatus_id varchar(5),
 order_status int NOT NULL,
 );
+-- pj
 
 CREATE TABLE OrderDIM (
 orderKey int IDENTITY PRIMARY KEY,
@@ -68,9 +68,6 @@ FOREIGN KEY (orderStatusKey) REFERENCES OrderStatusDIM (orderStatusKey)
 -- FOREIGN KEY (store_id) REFERENCES StoreDIM (store_id)
 -- FOREIGN KEY (staff_id) REFERENCES StaffDIM (staff_id)
 );
-
--- pj
-
 
 
 -- lexuan
