@@ -30,19 +30,13 @@ JOIN BikeSalesDWGroup3..CategoryDIM c ON p.category_id = c.category_id
 JOIN BikeSalesDWGroup3..BrandDIM b ON p.brand_id = b.brand_id
 LEFT JOIN (SELECT product_id, SUM(quantity) AS total_quantity FROM production.stocks GROUP BY product_id) s ON p.product_id = s.product_id
 
--- still editing 
--- Load data from sales.orders (OLTP) to BikeSalesDWGroup3.BrandDIM (OLAP)
+INSERT INTO BikeSalesDWGroup3..OrderDIM (order_id, order_status, order_date, required_date, shipped_date)
+SELECT order_id, order_status, order_date, required_date, shipped_date
+FROM sales.orders;
 
 
 -- Dont run these codes
 -- need fix
--- Load data from production.products (OLTP) to BikeSalesDWGroup3.ProductDIM (OLAP)
-
-
--- Load data from sales.orders (OLTP) to BikeSalesDWGroup3.OrderDIM (OLAP)
-INSERT INTO BikeSalesDWGroup3..OrderDIM (order_id, order_date, required_date, shipped_date, orderStatusKey)
-SELECT order_id, order_date, required_date, shipped_date, order_status
-FROM sales.orders;
 
 -- Load data from sales.order_items (OLTP) to BikeSalesDWGroup3.salesFact (OLAP)
 INSERT INTO BikeSalesDWGroup3..salesFact (timeKey, orderKey, customerKey, storeKey, staffKey, productKey, quantity, list_price, discount)

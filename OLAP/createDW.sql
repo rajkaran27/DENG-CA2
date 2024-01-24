@@ -1,10 +1,9 @@
--- *dont drop the database guys <3*
--- drop database if exists DW;
--- create database BikeSalesDWGroup3;
--- use BikeSalesDWGroup3;
+-- drop database if exists DW; run this first
+create database BikeSalesDWGroup3;
+use BikeSalesDWGroup3;
 
 -- raj
--- product,category,brand,time dimention
+-- product,category,brand,time dimension
 CREATE TABLE CategoryDIM(
     categoryKey int IDENTITY PRIMARY KEY,
     category_id varchar(5) NOT NULL,
