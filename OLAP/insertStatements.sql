@@ -61,11 +61,11 @@ JOIN BikeSalesDWGroup3..TimeDim t ON GETDATE() = t.Date; -- Assuming current dat
 
 -- pj SALEFACT testing
 INSERT INTO BikeSalesDWGroup3..salesFact (timeKey, orderKey, customerKey, storeKey, staffKey, productKey, quantity, list_price, discount)
-SELECT replace(CONVERT(DATE,o.order_date, 112),'-',''), o.orderKey, c.customerKey, s.storeKey, st.staffKey, p.productKey, oi.quantity, oi.list_price, oi.discount
+SELECT replace(CONVERT(DATE,os.order_date, 112),'-',''), o.orderKey, c.customerKey, s.storeKey, st.staffKey, p.productKey, oi.quantity, oi.list_price, oi.discount
 FROM sales.order_items oi
 JOIN sales.orders os ON oi.order_id = os.order_id
 JOIN BikeSalesDWGroup3..OrderDIM o ON os.order_id = o.orderKey
 JOIN BikeSalesDWGroup3..CustomerDIM c ON os.customer_id = c.customerKey
 JOIN BikeSalesDWGroup3..StoreDIM s ON os.store_id = s.storeKey
 JOIN BikeSalesDWGroup3..StaffDIM st ON os.staff_id = st.staffKey
-JOIN BikeSalesDWGroup3..ProductDIM p ON oi.product_id = p.product_id;
+JOIN BikeSalesDWGroup3..ProductDIM p ON oi.product_id = p.productKey;
