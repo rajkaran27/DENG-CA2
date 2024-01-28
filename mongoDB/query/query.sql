@@ -1,7 +1,7 @@
 --- MongoDB Query 1
 
 --mongodb version
-db.ZeroStock.find({"list_price":{"$lt":2000},"category_name":"Road Bike","quantity":0},{"product_name":1,"_id":0})
+db.ZeroStock.find({"list_price":{"$lt":2000},"category_name":"Road Bike"},{"_id":0,"product_name":1,"quantity":1});
 
 --sql verison
 use BikeSalesGroup3;
@@ -63,4 +63,4 @@ db.Stock.aggregate([{$lookup:{from:"UnSold",localField:"product_id",foreignField
 --- MongoDB Query 6
 
 --mongodb version
-db.ZeroStock.aggregate([{$lookup:{from:"UnSold",localField:"product_id",foreignField:"product_id",as:"soldInfo"}},{$match:{soldInfo:{$eq:[]}}},{$project:{_id:0,product_id:1,quantity:1,soldInfo:1}}]);
+db.ZeroStock.aggregate([{$lookup:{from:"UnSold",localField:"product_id",foreignField:"product_id",as:"soldInfo"}},{$match:{soldInfo:{$eq:[]}}},{$project:{_id:0,product_id:1,quantity:1}}]);
