@@ -34,38 +34,39 @@ INSERT INTO BikeSalesDWGroup3..OrderDIM (order_id, order_status, order_date, req
 SELECT order_id, order_status, order_date, required_date, shipped_date
 FROM sales.orders;
 
-
--- Dont run these codes
--- need fix
-
--- Load data from sales.order_items (OLTP) to BikeSalesDWGroup3.salesFact (OLAP)
-INSERT INTO BikeSalesDWGroup3..salesFact (timeKey, orderKey, customerKey, storeKey, staffKey, productKey, quantity, list_price, discount)
-SELECT t.timeKey, o.orderKey, c.customerKey, s.storeKey, st.staffKey, p.productKey, oi.quantity, oi.list_price, oi.discount
-FROM sales.order_items oi
-JOIN BikeSalesDWGroup3..OrderDIM o ON oi.order_id = o.order_id
-JOIN BikeSalesDWGroup3..CustomerDIM c ON o.customer_id = c.customer_id
-JOIN BikeSalesDWGroup3..StoreDIM s ON o.store_id = s.store_id
-JOIN BikeSalesDWGroup3..StaffDIM st ON o.staff_id = st.staff_id
-JOIN BikeSalesDWGroup3..ProductDIM p ON oi.product_id = p.product_id
-JOIN BikeSalesDWGroup3..TimeDim t ON o.order_date = t.Date;
-
--- Load data from production.stocks (OLTP) to BikeSalesDWGroup3.salesFact (OLAP)
-INSERT INTO BikeSalesDWGroup3..salesFact (timeKey, storeKey, productKey, quantity, list_price, discount)
-SELECT t.timeKey, s.storeKey, p.productKey, s.quantity, 0 AS list_price, 0 AS discount
-FROM production.stocks s
-JOIN BikeSalesDWGroup3..StoreDIM st ON s.store_id = st.store_id
-JOIN BikeSalesDWGroup3..ProductDIM p ON s.product_id = p.product_id
-JOIN BikeSalesDWGroup3..TimeDim t ON GETDATE() = t.Date; -- Assuming current date for stock data
-
--- Note: Adjust the column names and types according to your actual table structures
-
--- pj SALEFACT testing
 INSERT INTO BikeSalesDWGroup3..salesFact (timeKey, orderKey, customerKey, storeKey, staffKey, productKey, quantity, list_price, discount)
 SELECT replace(CONVERT(DATE,os.order_date, 112),'-',''), o.orderKey, c.customerKey, s.storeKey, st.staffKey, p.productKey, oi.quantity, oi.list_price, oi.discount
 FROM sales.order_items oi
 JOIN sales.orders os ON oi.order_id = os.order_id
-JOIN BikeSalesDWGroup3..OrderDIM o ON os.order_id = o.orderKey
-JOIN BikeSalesDWGroup3..CustomerDIM c ON os.customer_id = c.customerKey
-JOIN BikeSalesDWGroup3..StoreDIM s ON os.store_id = s.storeKey
-JOIN BikeSalesDWGroup3..StaffDIM st ON os.staff_id = st.staffKey
-JOIN BikeSalesDWGroup3..ProductDIM p ON oi.product_id = p.productKey;
+JOIN BikeSalesDWGroup3..OrderDIM o ON os.order_id = o.order_id
+JOIN BikeSalesDWGroup3..CustomerDIM c ON os.customer_id = c.customer_id
+JOIN BikeSalesDWGroup3..StoreDIM s ON os.store_id = s.store_id
+JOIN BikeSalesDWGroup3..StaffDIM st ON os.staff_id = st.staff_id
+JOIN BikeSalesDWGroup3..ProductDIM p ON oi.product_id = p.product_id;
+
+
+-- Dont run these codes
+-- need fix
+
+-- -- Load data from sales.order_items (OLTP) to BikeSalesDWGroup3.salesFact (OLAP)
+-- INSERT INTO BikeSalesDWGroup3..salesFact (timeKey, orderKey, customerKey, storeKey, staffKey, productKey, quantity, list_price, discount)
+-- SELECT t.timeKey, o.orderKey, c.customerKey, s.storeKey, st.staffKey, p.productKey, oi.quantity, oi.list_price, oi.discount
+-- FROM sales.order_items oi
+-- JOIN BikeSalesDWGroup3..OrderDIM o ON oi.order_id = o.order_id
+-- JOIN BikeSalesDWGroup3..CustomerDIM c ON o.customer_id = c.customer_id
+-- JOIN BikeSalesDWGroup3..StoreDIM s ON o.store_id = s.store_id
+-- JOIN BikeSalesDWGroup3..StaffDIM st ON o.staff_id = st.staff_id
+-- JOIN BikeSalesDWGroup3..ProductDIM p ON oi.product_id = p.product_id
+-- JOIN BikeSalesDWGroup3..TimeDim t ON o.order_date = t.Date;
+
+-- -- Load data from production.stocks (OLTP) to BikeSalesDWGroup3.salesFact (OLAP)
+-- INSERT INTO BikeSalesDWGroup3..salesFact (timeKey, storeKey, productKey, quantity, list_price, discount)
+-- SELECT t.timeKey, s.storeKey, p.productKey, s.quantity, 0 AS list_price, 0 AS discount
+-- FROM production.stocks s
+-- JOIN BikeSalesDWGroup3..StoreDIM st ON s.store_id = st.store_id
+-- JOIN BikeSalesDWGroup3..ProductDIM p ON s.product_id = p.product_id
+-- JOIN BikeSalesDWGroup3..TimeDim t ON GETDATE() = t.Date; -- Assuming current date for stock data
+
+-- -- Note: Adjust the column names and types according to your actual table structures
+
+-- pj SALEFACT testing

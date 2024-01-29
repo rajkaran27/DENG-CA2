@@ -97,7 +97,7 @@ CREATE TABLE StaffDIM (
 );
 
 CREATE TABLE TimeDim(	
-        [timeKey] INT IDENTITY primary key, 
+        [timeKey] INT  primary key, 
 		[Date] DATETIME,
 		[FullDateUK] CHAR(10), -- Date in dd-MM-yyyy format
 		[FullDateUSA] CHAR(10),-- Date in MM-dd-yyyy format
