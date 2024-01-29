@@ -12,4 +12,5 @@ JOIN
 GROUP BY
     c.category_name, p.product_name
 ORDER BY
-    TotalRevenue DESC;
+    category_name DESC;
+
