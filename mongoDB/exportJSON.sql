@@ -18,7 +18,7 @@ JOIN production.categories c ON c.category_id = p.category_id
 LEFT JOIN production.stocks s ON s.product_id = p.product_id 
 WHERE COALESCE(s.quantity, 0) = 0 OR s.product_id is null for JSON path;
 
---stocks
---select p.product_id,s.store_id,s.quantity from production.products p join production.stocks s on s.product_id=p.product_id 
+--stocks 938
+select p.product_id,s.store_id,s.quantity from production.products p join production.stocks s on s.product_id=p.product_id 
 
-select * from production.stocks where quantity != 0 for JSON path;
+--select * from production.stocks where quantity != 0 for JSON path;
