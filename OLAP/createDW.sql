@@ -54,19 +54,9 @@ CREATE TABLE OrderDIM (
 orderKey int IDENTITY PRIMARY KEY,
 order_id varchar(10),
 order_status int NOT NULL,
--- Order status: 1 = Pending; 2 = Processing; 3 = Rejected; 4 = Completed
 order_date DATE NOT NULL,
 required_date DATE NOT NULL,
 shipped_date DATE,
--- orderStatusKey int NOT NULL,
--- FOREIGN KEY (orderStatusKey) REFERENCES OrderStatusDIM (orderStatusKey)
--- customer_id varchar(10),
--- product_id varchar(10) NOT NULL,
--- store_id varchar(5) NOT NULL,
--- staff_id varchar(5) NOT NULL,
--- FOREIGN KEY (customer_id) REFERENCES CustomerDIM (customer_id)
--- FOREIGN KEY (store_id) REFERENCES StoreDIM (store_id)
--- FOREIGN KEY (staff_id) REFERENCES StaffDIM (staff_id)
 );
 
 
