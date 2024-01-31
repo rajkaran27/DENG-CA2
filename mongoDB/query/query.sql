@@ -1,7 +1,7 @@
 --- MongoDB Query 1
 
 --mongodb version
-db.ZeroStock.find({"list_price":{"$lt":2000},"category_name":"Road Bike"},{"_id":0,"product_name":1,"quantity":1});
+db.ZeroStock.find({"list_price":{"$lt":2000},"category_name":"Road Bike"},{"_id":0,"product_name":1,"list_price":1,"category_name":1,"quantity":1});
 
 --sql verison
 use BikeSalesGroup3;
@@ -12,7 +12,7 @@ FROM production.products p
 JOIN production.brands b ON p.brand_id = b.brand_id 
 JOIN production.categories c ON c.category_id = p.category_id 
 LEFT JOIN production.stocks s ON s.product_id = p.product_id 
-WHERE (COALESCE(s.quantity, 0) = 0 OR s.product_id is null) AND (p.list_price<2000 AND c.category_name='Road Bike');
+WHERE (s.product_id is null) AND (p.list_price<2000 AND c.category_name='Road Bike');
 
 
 --- MongoDB Query 2
