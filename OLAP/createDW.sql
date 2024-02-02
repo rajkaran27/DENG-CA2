@@ -42,11 +42,6 @@ city VARCHAR (255),
 state VARCHAR (10),
 zip_code VARCHAR (5)
 );
--- pj
-
--- CREATE TABLE OrderStatusDIM (
--- orderStatusKey int IDENTITY PRIMARY KEY,
--- );
 
 -- pj
 
