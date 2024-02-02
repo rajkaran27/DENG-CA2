@@ -12,12 +12,15 @@
 -- ORDER BY
 --     TotalRevenue DESC;
 
-SELECT TOP 10
+SELECT TOP 20
     c.customer_id,
     c.first_name,
     c.last_name,
+	COUNT(DISTINCT sf.orderKey) AS 'Number of Orders',
+	COUNT(sf.productKey) AS 'Number of Products purchased',
     SUM(sf.list_price - sf.discount) AS total_sales,
-    AVG(sf.list_price - sf.discount) AS avg_order_value
+    SUM(sf.list_price - sf.discount) / COUNT(DISTINCT sf.orderKey) AS 'Average Order Value',
+	MAX(sf.list_price - sf.discount) AS 'Most Expensive Order Purchased'
 FROM 
     CustomerDIM c
 JOIN 
@@ -28,5 +31,5 @@ ORDER BY
     total_sales DESC;
 
 
--- Who are the top 10 customers in terms of total sales?
+-- Who are the top 20 customers in terms of total sales? It helps identify high-value customers and their contribution to overall sales.
 -- What is the average order value for each customer?
