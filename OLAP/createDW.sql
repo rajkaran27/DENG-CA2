@@ -1,9 +1,7 @@
--- drop database if exists DW; run this first
 create database BikeSalesDWGroup3;
 use BikeSalesDWGroup3;
 
--- raj
--- product,category,brand,time dimension
+
 CREATE TABLE CategoryDIM(
     categoryKey int IDENTITY PRIMARY KEY,
     category_id varchar(5) NOT NULL,
@@ -30,7 +28,6 @@ CREATE TABLE ProductDIM(
 )
 
 
--- pj
 CREATE TABLE StoreDIM (
 storeKey int IDENTITY PRIMARY KEY,
 store_id varchar(5),
@@ -43,7 +40,6 @@ state VARCHAR (10),
 zip_code VARCHAR (5)
 );
 
--- pj
 
 CREATE TABLE OrderDIM (
 orderKey int IDENTITY PRIMARY KEY,
@@ -54,9 +50,6 @@ required_date DATE NOT NULL,
 shipped_date DATE,
 );
 
-
--- lexuan
---Customer, staff dimention
 CREATE TABLE CustomerDIM (
     customerKey INT IDENTITY PRIMARY KEY,
     customer_id VARCHAR(10) UNIQUE NOT NULL,
@@ -118,8 +111,6 @@ CREATE TABLE TimeDim(
 );
 
 
-
--- SalesFact
 CREATE TABLE salesFact (
     timeKey INT,
     orderKey INT,
