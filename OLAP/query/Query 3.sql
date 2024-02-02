@@ -22,8 +22,8 @@ SELECT
     pp.AverageDiscount,
     pp.AvgRevenueAftDiscount,
     CASE
-        WHEN pp.AvgRevenueAftDiscount > 1000 THEN 'Very Profitable'
-        WHEN pp.AvgRevenueAftDiscount > 500 THEN 'Moderately Profitable'
+        WHEN pp.AvgRevenueAftDiscount > 4000 THEN 'Very Profitable'
+        WHEN pp.AvgRevenueAftDiscount > 1000 THEN 'Moderately Profitable'
         ELSE 'Less Profitable'
     END AS ProfitabilityLevel
 FROM
